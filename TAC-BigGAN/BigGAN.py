@@ -68,11 +68,11 @@ class Generator(nn.Module):
     print("Generator saved_args is", saved_args)
 
 
-    # Channel width mulitplier
+    # Channel width mulitplier default: 64
     self.ch = G_ch
-    # Dimensionality of the latent space
+    # Dimensionality of the latent space default: 128
     self.dim_z = dim_z
-    # The initial spatial dimensions
+    # The initial spatial dimensions default: 4
     self.bottom_width = bottom_width
     # Resolution of the output
     self.resolution = resolution
@@ -110,7 +110,7 @@ class Generator(nn.Module):
     self.arch = G_arch(self.ch, self.attention)[resolution]
 
     # If using hierarchical latents, adjust z
-    if self.hier:
+    if self.hier: # default : False
       # Number of places z slots into
       self.num_slots = len(self.arch['in_channels']) + 1
       self.z_chunk_size = (self.dim_z // self.num_slots)
